@@ -1,0 +1,13 @@
+- name: move terraform file
+  copy:
+    dest: "~/terraform_workbook"
+    src: "simple_ec2_instance.tf"  
+
+- name: create ec2-instance 
+  shell: "cd ~/terraform_workbook &&
+          terraform init &&
+          terraform plan &&
+          terraform apply -auto-approve"
+  environment:
+    AWS_PROFILE: "{{ TF_VAR_AWS_PROFILE }}"
+    AWS_REGION: "{{ TF_VAR_AWS_REGION }}"

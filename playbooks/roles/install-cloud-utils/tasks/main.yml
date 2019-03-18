@@ -1,0 +1,10 @@
+- name: install terraform 
+  shell: 
+         "rm -rf ~/terraform && 
+          rm -rf ~/terraform_workbook &&
+          mkdir ~/terraform && 
+          mkdir ~/terraform_workbook &&
+          cd ~/terraform &&
+          wget 'https://apro.nbnco.net.au/wwm-public-generic/hashicorp/terraform/terraform_0.11.11_linux_amd64.zip' &&
+          unzip terraform*.zip &&
+          export PATH=$PATH:$PWD/terraform" 

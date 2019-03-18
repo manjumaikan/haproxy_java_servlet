@@ -1,0 +1,29 @@
+- name: create docker workspace 
+  shell: 
+          "rm -rf ~/docker_workbook && 
+          mkdir -p ~/docker_workbook/src/main/java/basicServlet"
+          
+- name: copy files
+  copy: src={{ item.src}} dest={{item.dest}}
+  with_items:
+  - {src: 'dockerfile',dest: '~/docker_workbook/'}
+  - {src: 'pom.xml',dest: '~/docker_workbook/'}
+  - {src: 'settings.xml',dest: '~/docker_workbook/'}
+  - {src: 'src/main/java/basicServlet/',dest: '~/docker_workbook/src/main/java/basicServlet'}
+
+- name: prepare docker daemon
+  shell: 
+          "systemctl enable docker &&
+          chkconfig docker on &&
+          systemctl daemon-reload &&
+          systemctl restart docker.service"
+
+- name: build docker
+  shell: 
+          "cd ~/docker_workbook &&
+         docker build -t mmk_java_servlet ."
+
+- name: run docker
+  shell: 
+          "docker run --name mmk_java_servlet_container_1 -d -p 9020:9000 mmk_java_servlet java -jar /java_servlet/target/custom-java-servlet-jar-with-dependencies.jar &&
+          docker run --name mmk_java_servlet_container_2 -d -p 9010:9010 mmk_java_servlet java -DCUSTOM_PORT=\"9010\" -jar /java_servlet/target/custom-java-servlet-jar-with-dependencies.jar"

@@ -1,0 +1,7 @@
+---
+repos:
+#   - { name: 'Artifactory.repo', repo_name: 'Artifactory', desc: 'Artifactory Pro', base_url: 'https://apro_wwm_user:{{artifactorypro_password}}@apro.nbnco.net.au/wwm-packages', enabled: 1, gpgcheck: 0 }
+#   - { name: 'devops-vault-other.repo', repo_name: 'DevOps vault', desc: 'DevOps Vault', base_url: 'https://vault.nbnco.net.au/public/devops/other/rpms/noarch', enabled: 1, gpgcheck: 1 }
+   - { name: 'Centos7Base.repo', repo_name: 'Centos7Base', desc: 'Centos7 Base Remote', base_url: 'https://apro.nbnco.net.au/centos-remote/7/os/x86_64', enabled: 1, gpgcheck: 0 }
+   - { name: 'Centos7Extras.repo', repo_name: 'Centos7Extras', desc: 'Centos7 Extras Remote', base_url: 'https://apro.nbnco.net.au/centos-remote/7/extras/x86_64', enabled: 1, gpgcheck: 0 }
+   - { name: 'Centos7Updates.repo', repo_name: 'Centos7Updates', desc: 'Centos7 Updates Remote', base_url: 'https://apro.nbnco.net.au/centos-remote/7/updates/x86_64', enabled: 1, gpgcheck: 0 }

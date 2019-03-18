@@ -1,0 +1,27 @@
+- name: Install packages
+  yum:
+    name: "{{item}}"
+    state: installed
+    validate_certs: false
+  with_items:
+    - 'docker'
+    - 'haproxy'
+  #ignore_errors: true
+  retries: 2
+  delay: 3
+  register: yum_result
+  until: yum_result|succeeded
+
+- shell: "setsebool -P haproxy_connect_any on"
+
+- shell: "semanage permissive -a haproxy_t"
+  
+- name: set up HAproxy config
+  template:
+    src: 'haproxy.cfg'
+    dest: '/etc/haproxy/haproxy.cfg'
+    mode: 0600
+    owner: "root"
+    group: "root"
+  notify:
+    - restart haproxy

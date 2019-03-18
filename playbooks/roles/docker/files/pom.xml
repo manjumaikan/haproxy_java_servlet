@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>java8.http</groupId>
+	<artifactId>basic-java-servlet</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>Basic Java Servlet</name>
+	<organization>
+		<name>NBNCo</name>
+		<url>http://www.nbnco.com.au</url>
+	</organization>
+	<properties>
+		<isRelease>true</isRelease>
+		<jdk.version>1.8</jdk.version>
+		<java.compiler.version>1.8</java.compiler.version>
+		<java.exe.path>/usr/lib/jvm/java-1.8-openjdk/bin/javac</java.exe.path>
+	</properties>
+	<dependencies>
+	<!-- https://mvnrepository.com/artifact/com.sun.net.httpserver/http -->
+<!--<dependency>
+    <groupId>com.sun.net.httpserver</groupId>
+    <artifactId>http</artifactId>
+    <version>20070405</version>
+</dependency>-->
+	</dependencies>
+	<build>
+		<finalName>custom-java-servlet</finalName>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<excludes>
+					<exclude>**</exclude>
+				</excludes>
+			</resource>
+		</resources>
+		<plugins>
+			<!-- Set a JDK compiler level -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<verbose>false</verbose>
+					<fork>true</fork>
+					<executable>${java.exe.path}</executable>
+					<compilerVersion>${java.compiler.version}</compilerVersion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addClasspath>true</addClasspath>
+							<mainClass>basicServlet.httpServlet</mainClass>
+						</manifest>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<manifestSections>
+							<manifestSection>
+								<name>Build-Information</name>
+								<manifestEntries>
+									<Project-Name>${project.name}</Project-Name>
+								</manifestEntries>
+							</manifestSection>
+							<manifestSection>
+								<name>Module-Information</name>
+								<manifestEntries>
+									<Group-ID>${project.groupId}</Group-ID>
+									<Artifact-ID>${project.artifactId}</Artifact-ID>
+									<Version>${project.version}</Version>
+								</manifestEntries>
+							</manifestSection>
+						</manifestSections>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

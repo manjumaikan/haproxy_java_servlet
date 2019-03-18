@@ -1,0 +1,17 @@
+---
+- name: Install DevOps RPM key
+  copy:
+    src:   RPM-GPG-KEY-devops
+    dest:  /etc/pki/rpm-gpg/RPM-GPG-KEY-devops
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Setup Yum repos
+  template:
+    src: generic.j2
+    dest: "/etc/yum.repos.d/{{ item.name }}"
+  with_items: '{{repos}}'
+
+- name: fix rhn setup
+  shell: "rpm -e --nodeps $(rpm -qa|grep rhn)"

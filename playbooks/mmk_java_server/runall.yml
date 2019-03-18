@@ -1,0 +1,18 @@
+- hosts: localhost
+  become: yes
+  become_user: developer
+  gather_facts: true
+
+  roles:
+    - install-cloud-utils
+    - create-cloud-infrastructure
+
+- hosts: learning_instance
+  become: yes
+  become_user: root
+  gather_facts: true
+
+  roles:
+    - yumrepos
+    - install-softwares
+    - docker
