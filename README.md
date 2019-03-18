@@ -1,6 +1,6 @@
 # HAProxy balanced java servlet application
 
-The HAProxy loadbalancer is exposed on 9000. The load is distributed in a round robin method. Statistics of the HAProxy performance is exposed on port 9500. Stats are password protected. default user is developer and password is maximo. Modify the haproxy.cfg file located under playbooks/roles/install-softwares/templates/haproxy.cfg . 
+The HAProxy loadbalancer is exposed on 9000. The load is distributed in a round robin method. Statistics of the HAProxy performance is exposed on port 9500. Stats are password protected. default user is developer and password is maximo. Modify the haproxy.cfg file located under playbooks/roles/install-softwares/templates/haproxy.cfg
 
 Note 2 docker containers are run as part of the program and run on local port 9010(docker port 9010) and 9020(docker port 9000). You can observe the switch of application by hitting the root context.
 
