@@ -1,2 +1,2 @@
 [learning_instance]
-ec2-user@mmk-private-hosted-java-server.nbn-aws-learning.local.apps.sandpit.nbn-aws.local
+#provide the instance where the code will be deployed
